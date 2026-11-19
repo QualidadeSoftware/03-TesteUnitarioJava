@@ -117,6 +117,16 @@ class ContaTest {
         assertEquals(100, conta.getSaldo());
     }
 
+    @Test
+    void depositar_ContaEncerrada_LancaExcecaoESaldoPreservado() {
+        var conta = new Conta("Maria");
+        conta.encerrar();
+
+        assertThrows(IllegalStateException.class, () -> conta.depositar(50));
+        assertFalse(conta.isAtiva());
+        assertEquals(0, conta.getSaldo());
+    }
+
     // =======================================================
     //  Testes para sacar
     //  Sugestão de testes:
