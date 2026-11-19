@@ -216,6 +216,18 @@ class ContaTest {
         assertEquals(100, destino.getSaldo());
     }
 
+    @Test
+    void transferir_ContaOrigemInativa_LancaExcecaoESaldosPreservados() {
+        var origem = new Conta("Maria");
+        origem.encerrar();
+        var destino = new Conta("João", 100);
+
+        assertThrows(IllegalStateException.class, () -> origem.transferir(destino, 0));
+        assertFalse(origem.isAtiva());
+        assertEquals(0, origem.getSaldo());
+        assertEquals(100, destino.getSaldo());
+    }
+
     // =======================================================
     //  Testes para encerrar
     //  Sugestão de testes:
