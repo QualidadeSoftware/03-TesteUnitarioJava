@@ -98,6 +98,14 @@ class ContaTest {
     //    - Depósito em conta inativa lança IllegalStateException
     // =======================================================
 
+    @Test
+    void depositar_ValorValido_AtualizaSaldo() {
+        var conta = new Conta("Maria", 100);
+
+        conta.depositar(50);
+
+        assertEquals(150, conta.getSaldo());
+    }
 
     // =======================================================
     //  Testes para sacar
