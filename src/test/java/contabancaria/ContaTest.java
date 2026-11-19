@@ -206,6 +206,16 @@ class ContaTest {
         assertEquals(100, destino.getSaldo());
     }
 
+    @Test
+    void transferir_SaldoInsuficiente_LancaExcecaoESaldosPreservados() {
+        var origem = new Conta("Maria", 200);
+        var destino = new Conta("João", 100);
+
+        assertThrows(IllegalStateException.class, () -> origem.transferir(destino, 201));
+        assertEquals(200, origem.getSaldo());
+        assertEquals(100, destino.getSaldo());
+    }
+
     // =======================================================
     //  Testes para encerrar
     //  Sugestão de testes:
