@@ -184,6 +184,16 @@ class ContaTest {
     //    - Transferência com conta destino inativa lança exceção
     // =======================================================
 
+    @Test
+    void transferir_ValorValido_AtualizaAmbasAsContas() {
+        var origem = new Conta("Maria", 200);
+        var destino = new Conta("João", 100);
+
+        origem.transferir(destino, 50);
+
+        assertEquals(150, origem.getSaldo());
+        assertEquals(150, destino.getSaldo());
+    }
 
     // =======================================================
     //  Testes para encerrar
