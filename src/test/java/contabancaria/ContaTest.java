@@ -195,6 +195,17 @@ class ContaTest {
         assertEquals(150, destino.getSaldo());
     }
 
+    @ParameterizedTest
+    @CsvSource({"0", "-10"})
+    void transferir_ValorNaoPositivo_LancaExcecaoESaldosPreservados(double valor) {
+        var origem = new Conta("Maria", 200);
+        var destino = new Conta("João", 100);
+
+        assertThrows(IllegalArgumentException.class, () -> origem.transferir(destino, valor));
+        assertEquals(200, origem.getSaldo());
+        assertEquals(100, destino.getSaldo());
+    }
+
     // =======================================================
     //  Testes para encerrar
     //  Sugestão de testes:
