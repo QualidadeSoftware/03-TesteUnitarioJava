@@ -107,6 +107,15 @@ class ContaTest {
         assertEquals(150, conta.getSaldo());
     }
 
+    @ParameterizedTest
+    @CsvSource({"0", "-10"})
+    void depositar_ValorNaoPositivo_LancaExcecao(double valor) {
+        var conta = new Conta("Maria", 100);
+
+        assertThrows(IllegalArgumentException.class, () -> conta.depositar(valor));
+        assertEquals(100, conta.getSaldo());
+    }
+
     // =======================================================
     //  Testes para sacar
     //  Sugestão de testes:
